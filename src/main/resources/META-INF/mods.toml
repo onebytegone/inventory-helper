@@ -1,0 +1,13 @@
+# The name/version of the mod loader type to load
+modLoader="javafml"
+loaderVersion="[37,)"
+
+license="MIT License"
+
+[[mods]]
+   modId="inventoryhelper"
+   version="${file.jarVersion}"
+   displayName="Inventory Helper"
+   description='''
+Inventory management shortcut buttons.
+'''
