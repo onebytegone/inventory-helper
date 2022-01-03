@@ -129,12 +129,14 @@ public class InventoryHelper {
             Button inventoryCombineButton = makeCombineButton(leftSideX, inventoryY, true);
             e.addWidget(containerCombineButton);
 
+            Button containerUnloadButton = makeUnloadContainerButton(rightSideX, containerY);
             Button restockButton = makeRestockButton(rightSideX, inventoryY);
             Button fillButton = makeFillButton(rightSideX, restockButton.y + restockButton.getHeight() + 2);
             Button unloadButton = makeUnloadButton(rightSideX, fillButton.y + fillButton.getHeight() + 2);
 
             e.addWidget(containerCombineButton);
             e.addWidget(inventoryCombineButton);
+            e.addWidget(containerUnloadButton);
             e.addWidget(restockButton);
             e.addWidget(fillButton);
             e.addWidget(unloadButton);
@@ -190,6 +192,30 @@ public class InventoryHelper {
                }
             });
          }
+      });
+   }
+
+   private Button makeUnloadContainerButton(int x, int y) {
+      // "Unload": Move all from container
+      return new Button(x, y, 50, 20, new TextComponent("Unload"), (button) -> {
+         Minecraft minecraft = Minecraft.getInstance();
+         Player player = minecraft.player;
+         Inventory playerInventory = player.getInventory();
+         AbstractContainerMenu containerMenu = player.containerMenu;
+
+         List<Slot> containerSlots = containerMenu.slots.stream()
+            .filter(slot -> (slot.container != playerInventory))
+            .collect(Collectors.toList());
+
+         containerSlots.stream().forEach(sourceSlot -> {
+            ItemStack itemStack = sourceSlot.getItem();
+            ResourceLocation resourceLocation = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
+
+            if (!itemStack.isEmpty()) {
+               LOGGER.info("Unloading container: " + resourceLocation);
+               minecraft.gameMode.handleInventoryMouseClick(containerMenu.containerId, sourceSlot.index, 0, ClickType.QUICK_MOVE, player);
+            }
+         });
       });
    }
 
