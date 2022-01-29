@@ -18,7 +18,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
+import net.minecraftforge.client.event.ScreenEvent.InitScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -95,8 +95,8 @@ public class InventoryHelper {
 
    @SubscribeEvent
    @OnlyIn(Dist.CLIENT)
-   public void onScreenInit(InitGuiEvent.Post e) {
-      Screen screen = e.getGui();
+   public void onScreenInit(InitScreenEvent.Post e) {
+      Screen screen = e.getScreen();
 
       if (screen != null) {
          LOGGER.info("Screen init event " + screen.getClass().getName());
@@ -127,19 +127,19 @@ public class InventoryHelper {
 
             Button containerCombineButton = makeCombineButton(leftSideX, containerY, false);
             Button inventoryCombineButton = makeCombineButton(leftSideX, inventoryY, true);
-            e.addWidget(containerCombineButton);
+            e.addListener(containerCombineButton);
 
             Button containerUnloadButton = makeUnloadContainerButton(rightSideX, containerY);
             Button restockButton = makeRestockButton(rightSideX, inventoryY);
             Button fillButton = makeFillButton(rightSideX, restockButton.y + restockButton.getHeight() + 2);
             Button unloadButton = makeUnloadButton(rightSideX, fillButton.y + fillButton.getHeight() + 2);
 
-            e.addWidget(containerCombineButton);
-            e.addWidget(inventoryCombineButton);
-            e.addWidget(containerUnloadButton);
-            e.addWidget(restockButton);
-            e.addWidget(fillButton);
-            e.addWidget(unloadButton);
+            e.addListener(containerCombineButton);
+            e.addListener(inventoryCombineButton);
+            e.addListener(containerUnloadButton);
+            e.addListener(restockButton);
+            e.addListener(fillButton);
+            e.addListener(unloadButton);
          } else if (screen instanceof InventoryScreen) {
             InventoryScreen inventoryScreen = (InventoryScreen) screen;
             Button inventoryCombineButton = makeCombineButton(
@@ -148,7 +148,7 @@ public class InventoryHelper {
                true
             );
 
-            e.addWidget(inventoryCombineButton);
+            e.addListener(inventoryCombineButton);
          }
       }
    }
