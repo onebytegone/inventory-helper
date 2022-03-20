@@ -1,6 +1,6 @@
 # The name/version of the mod loader type to load
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[40,)"
 
 license="MIT License"
 
