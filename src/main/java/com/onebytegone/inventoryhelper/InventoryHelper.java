@@ -6,7 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -155,7 +155,7 @@ public class InventoryHelper {
 
    private Button makeUnloadButton(int x, int y) {
       // "Unload": Move all inventory except for those on the exclude list
-      return new Button(x, y, 50, 20, new TextComponent("Unload"), (button) -> {
+      return new Button(x, y, 50, 20, Component.literal("Unload"), (button) -> {
          Minecraft minecraft = Minecraft.getInstance();
          Player player = minecraft.player;
          Inventory playerInventory = player.getInventory();
@@ -197,7 +197,7 @@ public class InventoryHelper {
 
    private Button makeUnloadContainerButton(int x, int y) {
       // "Unload": Move all from container
-      return new Button(x, y, 50, 20, new TextComponent("Unload"), (button) -> {
+      return new Button(x, y, 50, 20, Component.literal("Unload"), (button) -> {
          Minecraft minecraft = Minecraft.getInstance();
          Player player = minecraft.player;
          Inventory playerInventory = player.getInventory();
@@ -221,7 +221,7 @@ public class InventoryHelper {
 
    private Button makeFillButton(int x, int y) {
       // "Fill": Move any like items from the inventory to container
-      return new Button(x, y, 50, 20, new TextComponent("Fill"), (button) -> {
+      return new Button(x, y, 50, 20, Component.literal("Fill"), (button) -> {
          Minecraft minecraft = Minecraft.getInstance();
          Player player = minecraft.player;
          Inventory playerInventory = player.getInventory();
@@ -260,7 +260,7 @@ public class InventoryHelper {
 
    private Button makeRestockButton(int x, int y) {
       // "Restock": Fill any partial stacks in the container
-      return new Button(x, y, 50, 20, new TextComponent("Restock"), (button) -> {
+      return new Button(x, y, 50, 20, Component.literal("Restock"), (button) -> {
          Minecraft minecraft = Minecraft.getInstance();
          Player player = minecraft.player;
          Inventory playerInventory = player.getInventory();
@@ -326,7 +326,7 @@ public class InventoryHelper {
 
    private Button makeCombineButton(int x, int y, boolean forPlayerInventory) {
       // "Combine": Merge any partial stacks
-      return new Button(x, y, 50, 20, new TextComponent("Combine"), (button) -> {
+      return new Button(x, y, 50, 20, Component.literal("Combine"), (button) -> {
          Minecraft minecraft = Minecraft.getInstance();
          Player player = minecraft.player;
          Inventory playerInventory = player.getInventory();
