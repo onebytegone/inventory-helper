@@ -27,6 +27,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -192,6 +194,12 @@ public class InventoryHelper {
                }
             });
          }
+      }, new Button.OnTooltip() {
+         public void onTooltip(Button b, PoseStack stack, int x, int y) {
+            Minecraft minecraft = Minecraft.getInstance();
+
+            minecraft.screen.renderTooltip(stack, Component.literal("Shift to include from hotbar"), x, y);
+         }
       });
    }
 
@@ -255,6 +263,12 @@ public class InventoryHelper {
                });
             }
          });
+      }, new Button.OnTooltip() {
+         public void onTooltip(Button b, PoseStack stack, int x, int y) {
+            Minecraft minecraft = Minecraft.getInstance();
+
+            minecraft.screen.renderTooltip(stack, Component.literal("Fill container with like items"), x, y);
+         }
       });
    }
 
@@ -321,6 +335,12 @@ public class InventoryHelper {
                LOGGER.info("Stack of " + resourceLocation + " now has " + targetItemStack.getCount() + " items");
             }
          });
+      }, new Button.OnTooltip() {
+         public void onTooltip(Button b, PoseStack stack, int x, int y) {
+            Minecraft minecraft = Minecraft.getInstance();
+
+            minecraft.screen.renderTooltip(stack, Component.literal("Restock partial stacks"), x, y);
+         }
       });
    }
 
