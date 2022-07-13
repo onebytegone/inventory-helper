@@ -18,7 +18,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ScreenEvent.InitScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent.Init;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -97,7 +97,7 @@ public class InventoryHelper {
 
    @SubscribeEvent
    @OnlyIn(Dist.CLIENT)
-   public void onScreenInit(InitScreenEvent.Post e) {
+   public void onScreenInit(Init.Post e) {
       Screen screen = e.getScreen();
 
       if (screen != null) {
